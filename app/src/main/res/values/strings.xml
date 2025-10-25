@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Jarvis Assistant</string>
+    <string name="notification_channel_name">Jarvis Assistant</string>
+    <string name="notification_channel_desc">Foreground service for always-on assistant</string>
+</resources>
