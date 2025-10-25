@@ -49,7 +49,8 @@ android {
         buildConfig = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.15"
+        // Match Kotlin 2.0.x
+        kotlinCompilerExtensionVersion = "1.7.5"
     }
 
     packaging {
