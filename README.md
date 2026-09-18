@@ -8,7 +8,11 @@ The owner's role is **owner, not operator**: observe, approve, decide.
 
 ## Where things stand
 
-**Phase: market research complete → awaiting owner decision on which opportunity to validate.**
+**Phase: opportunity selected. Plan complete, awaiting approval to build.**
+
+**Selected:** carrier commission-statement reconciliation for small & mid independent
+insurance agencies (Finalist 1), chosen after two research waves covering ~30
+industries and 25 rejected opportunities.
 
 | Doc | What it is |
 |---|---|
@@ -16,14 +20,34 @@ The owner's role is **owner, not operator**: observe, approve, decide.
 | [`business/02-REJECTED.md`](business/02-REJECTED.md) | 11 opportunities investigated and killed, with the reason each died |
 | [`business/03-FINALISTS.md`](business/03-FINALISTS.md) | The 4 finalists, in full |
 | [`business/04-THESIS-AND-PLAN.md`](business/04-THESIS-AND-PLAN.md) | Scoring, investment thesis, kill criteria, validation plan, permissions model |
+| [`business/05-WAVE-2-RESEARCH.md`](business/05-WAVE-2-RESEARCH.md) | Second research wave: 14 more opportunities killed, plus the two meta-findings that shaped the final plan |
+| [`business/06-PRODUCT-SPEC.md`](business/06-PRODUCT-SPEC.md) | Architecture, data model, parsing strategy, the matching cascade, security, scope discipline |
+| [`business/07-GO-TO-MARKET.md`](business/07-GO-TO-MARKET.md) | Positioning, pricing page copy, SEO plan, launch gates, agent operating model |
 
-## Recommendation
+## The business
 
-**Carrier commission-statement reconciliation for small & mid independent insurance agencies.**
+**Find the commission your carriers didn't pay you.**
 
-Boring, monthly, already-paid-for, and reachable at **under 30 customers for $5,000/month**.
+Small independent insurance agencies receive commission statements from 10-40
+carriers every month, in mutually incompatible formats, and must match every line
+against their own book to find policies paid at the wrong rate or not paid at all.
+Underpayment is silent: an agency that does not reconcile never learns it was
+shorted.
 
-Cost to reach the first honest go/no-go signal: **under $100.**
+- **Monthly, permanent, externally triggered** - the carriers cause it, not our
+  customer's discipline
+- **Willingness to pay is already published**: $67-$187/mo for commission trackers,
+  $400-$800/mo for reconciliation platforms
+- **The $180-$400 self-serve band is empty**, and every serious competitor is
+  coupled to a specific AMS or to an IVANS feed
+- **$5,000/month needs under 30 customers**
+- Cost to reach the first honest go/no-go signal: **under $100**
+
+## Next gate
+
+Stage 0 (free tool + landing page + accuracy testing) needs nothing from the owner
+and costs nothing. Everything after it is gated in
+[`07-GO-TO-MARKET.md` §4](business/07-GO-TO-MARKET.md).
 
 ## Evidence discipline
 
