@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { convertStatement, type SourceFormat } from "@/lib/convert";
 import { MemoryProfileStore } from "@/lib/profiles";
+import { recordUpload } from "@/lib/telemetry";
 
 export const runtime = "nodejs";
 
@@ -61,6 +62,16 @@ export async function POST(request: Request) {
             buffer: await file.arrayBuffer(),
             store,
           });
+
+    recordUpload({
+      ...result.telemetry,
+      // Extension only. The filename itself can contain an agency's own name, so
+      // it is used for carrier detection in memory and never recorded.
+      fileExtension: format,
+      fileSizeBytes: file.size,
+      succeeded: result.ok,
+      errorCodes: result.issues.filter((i) => i.severity === "error").map((i) => i.code),
+    });
 
     return NextResponse.json({
       ok: result.ok,

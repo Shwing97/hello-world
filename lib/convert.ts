@@ -76,14 +76,16 @@ export async function convertStatement(input: ConvertInput): Promise<ConversionR
   const occurredAt = new Date().toISOString();
 
   if (format === "pdf") {
-    // Deliberately unimplemented in Stage 0. PDF layouts cannot be validated
-    // without real samples, and a plausible-looking wrong number is worse than an
-    // honest refusal. These uploads are still counted for K3.
+    // Deliberately unimplemented. PDF layouts cannot be validated without real
+    // samples, and a plausible-looking wrong number is worse than an honest
+    // refusal. The upload is still identified and counted, because "which
+    // carriers do people bring us as PDFs" is exactly what we need to learn.
+    const pdfCarrier = detectCarrier(filename, "");
     return {
       ok: false,
       lines: [],
       headers: [],
-      carrier: null,
+      carrier: pdfCarrier,
       columnMap: {},
       issues: [{
         severity: "error",
@@ -92,9 +94,9 @@ export async function convertStatement(input: ConvertInput): Promise<ConversionR
       }],
       validation: null,
       telemetry: {
-        fingerprint: "", carrierId: null, format, profileExisted: false,
-        inductionMethod: "failed", profileConfidence: 0, lineCount: 0,
-        headerRowIndex: -1, occurredAt,
+        fingerprint: "", carrierId: pdfCarrier?.carrier.id ?? null, format,
+        profileExisted: false, inductionMethod: "failed", profileConfidence: 0,
+        lineCount: 0, headerRowIndex: -1, occurredAt,
       },
     };
   }

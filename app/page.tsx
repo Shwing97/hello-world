@@ -80,6 +80,30 @@ export default function Home() {
         </div>
       </section>
 
+      <section>
+        <div className="wrap narrow">
+          <h2>Guides</h2>
+          <ul className="plain">
+            <li>
+              <Link href="/guides/why-vlookup-breaks">
+                Why VLOOKUP breaks on commission reconciliation
+              </Link>
+              <div className="note">
+                The four specific ways a spreadsheet match fails &mdash; and why each one fails
+                silently.
+              </div>
+            </li>
+            <li>
+              <Link href="/guides/book-export-fields">What your book export needs to contain</Link>
+              <div className="note">
+                The fields a reconciliation actually requires, and the ones you should delete before
+                sending anything anywhere.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
       <section id="pricing">
         <div className="wrap narrow">
           <h2>Pricing</h2>
