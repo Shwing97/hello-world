@@ -35,3 +35,11 @@ describe("toTabularSource", () => {
     expect(toTabularSource(grid).headerRowIndex).toBe(-1);
   });
 });
+
+describe("hostile input", () => {
+  it("caps the rows read from a single file", async () => {
+    const { MAX_ROWS } = await import("@/lib/tabular");
+    const huge = "a,b,c\n" + "1,2,3\n".repeat(MAX_ROWS + 500);
+    expect(parseCsv(huge).length).toBeLessThanOrEqual(MAX_ROWS);
+  });
+});

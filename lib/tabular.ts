@@ -13,6 +13,16 @@ import { CANONICAL_FIELDS, FIELD_SYNONYMS } from "./schema";
 
 export type Grid = string[][];
 
+/**
+ * Hard ceiling on rows read from any single file.
+ *
+ * This endpoint is public and unauthenticated, and an .xlsx is a zip archive: a
+ * few megabytes can decompress into something enormous. A commission statement
+ * with more than this many lines does not exist in the segment we serve, so the
+ * cap costs real users nothing and bounds the damage a hostile upload can do.
+ */
+export const MAX_ROWS = 50_000;
+
 export interface TabularSource {
   grid: Grid;
   headerRowIndex: number;
@@ -108,7 +118,9 @@ export function toTabularSource(grid: Grid): TabularSource {
 
 export function parseCsv(text: string): Grid {
   const result = Papa.parse<string[]>(text, { skipEmptyLines: false });
-  return result.data.map((row) => (Array.isArray(row) ? row.map((c) => String(c ?? "")) : []));
+  return result.data
+    .slice(0, MAX_ROWS)
+    .map((row) => (Array.isArray(row) ? row.map((c) => String(c ?? "")) : []));
 }
 
 /** Reads the sheet with the most populated rows, not blindly the first one. */
@@ -121,6 +133,7 @@ export async function parseXlsx(buffer: ArrayBuffer): Promise<Grid> {
   workbook.eachSheet((sheet) => {
     const grid: Grid = [];
     sheet.eachRow({ includeEmpty: true }, (row) => {
+      if (grid.length >= MAX_ROWS) return;
       const values = Array.isArray(row.values) ? row.values.slice(1) : [];
       grid.push(values.map((v) => cellToString(v)));
     });
