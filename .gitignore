@@ -21,3 +21,11 @@ captures/
 # Generated files
 app/release/
 app/debug/
+
+# Node / Next
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+.env*.local

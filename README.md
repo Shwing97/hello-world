@@ -8,7 +8,7 @@ The owner's role is **owner, not operator**: observe, approve, decide.
 
 ## Where things stand
 
-**Phase: opportunity selected. Plan complete, awaiting approval to build.**
+**Phase: Stage 0 built and verified. Awaiting a domain to publish.**
 
 **Selected:** carrier commission-statement reconciliation for small & mid independent
 insurance agencies (Finalist 1), chosen after two research waves covering ~30
@@ -23,6 +23,7 @@ industries and 25 rejected opportunities.
 | [`business/05-WAVE-2-RESEARCH.md`](business/05-WAVE-2-RESEARCH.md) | Second research wave: 14 more opportunities killed, plus the two meta-findings that shaped the final plan |
 | [`business/06-PRODUCT-SPEC.md`](business/06-PRODUCT-SPEC.md) | Architecture, data model, parsing strategy, the matching cascade, security, scope discipline |
 | [`business/07-GO-TO-MARKET.md`](business/07-GO-TO-MARKET.md) | Positioning, pricing page copy, SEO plan, launch gates, agent operating model |
+| [`business/08-STAGE-0-STATUS.md`](business/08-STAGE-0-STATUS.md) | What was built, what was verified over HTTP, the bugs the tests caught, and what is deliberately not done |
 
 ## The business
 
@@ -43,11 +44,29 @@ shorted.
 - **$5,000/month needs under 30 customers**
 - Cost to reach the first honest go/no-go signal: **under $100**
 
+## The code
+
+Stage 0 is built: a working Next.js app with the free statement converter, the
+extraction core beneath it, and 41 tests including the K4 accuracy harness.
+
+```
+npm install
+npm test          # prints the K4 accuracy score
+npm run dev       # http://localhost:3000
+```
+
+Verified over HTTP against real files, not just compiled - including all three
+refusal paths, Excel with native date cells, and the profile-reuse mechanic that
+measures the carrier format tail (K3).
+
+**The K4 score of 100% is against fixtures I wrote myself.** It is a regression
+baseline, not evidence of real-world accuracy, and
+[`08-STAGE-0-STATUS.md`](business/08-STAGE-0-STATUS.md) says so at length.
+
 ## Next gate
 
-Stage 0 (free tool + landing page + accuracy testing) needs nothing from the owner
-and costs nothing. Everything after it is gated in
-[`07-GO-TO-MARKET.md` §4](business/07-GO-TO-MARKET.md).
+A domain (~$15) is the first thing that needs the owner. Everything after it is
+gated in [`07-GO-TO-MARKET.md` §4](business/07-GO-TO-MARKET.md).
 
 ## Evidence discipline
 
