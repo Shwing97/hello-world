@@ -52,6 +52,17 @@ Firms that keep the books for independent insurance agencies each serve 5–20
 agencies, and they are the ones actually doing the reconciliation by hand. One
 reply can be a dozen statements.
 
+**Send from:** a fresh Gmail — `statementsweep@gmail.com` or similar. Deliberately
+not a custom-domain address: a brand-new domain has no sending reputation, so
+cold-ish B2B mail from one lands in spam far more often than mail from an
+established provider. At this volume Gmail is the better choice on the merits, not
+just the cheaper one.
+
+Set the display name to a real person's name rather than the product's, forward it
+to an inbox that actually gets read, and send them one at a time by hand. Fifteen
+manual sends from a fresh Gmail is ordinary behaviour; fifteen through a bulk tool
+from a fresh Gmail is a spam signal.
+
 **Find them:** search `"insurance agency bookkeeping" services` or
 `bookkeeping for insurance agencies`. There are specialist firms that do only this.
 Aim for **10–15 emails**, no more. This is targeted low-touch outbound, not a
