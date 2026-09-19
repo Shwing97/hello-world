@@ -1,6 +1,34 @@
 # Stage 0 — status
 
-**Built and verified. No spend. Nothing published. Nothing required from the owner.**
+**Built, verified, and deployed. No spend.**
+
+**Live at https://statement-sweep.vercel.app** — but currently reachable only by the
+account owner. See "Deployment" below and `09-LAUNCH-KIT.md` §0: one Vercel setting
+has to be changed before anyone else can open it.
+
+## Deployment
+
+Free Vercel hosting on the Hobby plan, which removed the domain from the critical
+path entirely. K1 (will agencies upload?) and K3 (how long is the carrier format
+tail?) can now be measured for **$0** rather than waiting on a domain purchase.
+That was an error in the earlier plan, and this corrects it.
+
+| | |
+|---|---|
+| URL | `statement-sweep.vercel.app` |
+| Project | `statement-sweep` (new, isolated) |
+| Cost | $0 — Hobby plan |
+| Indexing | `noindex` + robots disallow while on a temporary subdomain |
+
+**Two things the owner needs to know:**
+
+1. **The site is not publicly reachable yet.** The Vercel team has
+   `ssoProtection` enabled for all non-custom domains. The connector token can
+   create deployments but is not authorised to change project settings in that
+   scope, so this has to be switched off by hand. 30 seconds, scoped to this
+   project, reversible.
+2. **Hobby is for non-commercial use.** Fine for a free validation tool with no
+   revenue. Before this ever takes money it has to move to Pro (~$20/mo).
 
 ## What exists
 
@@ -87,6 +115,17 @@ design that keeps the margin kill criterion (K7) open.
 Network egress is blocked here, so **domain availability for every candidate name
 remains UNKNOWN**, and the competitor prices in the research docs are from search
 summaries rather than pricing pages I could open.
+
+## Hardening done before exposing the upload endpoint
+
+- **Row cap (50,000).** An `.xlsx` is a zip archive, so a few megabytes can
+  decompress into something far larger. The cap is applied *during* sheet
+  iteration, not after, so a hostile archive is never fully materialised. No real
+  commission statement approaches this size.
+- **8 MB upload limit**, enforced before any parsing.
+- **No stored files**, no database, no secrets in the project — so the blast radius
+  of the endpoint being public is a failed function invocation, not a breach.
+- **SSN-shaped strings are refused** at ingest.
 
 ## Run it
 
