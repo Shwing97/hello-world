@@ -69,16 +69,48 @@ real-world accuracy. Do not quote it to anyone as proof the parser works. It
 becomes meaningful only when real carrier statements are labelled into
 tests/accuracy.test.ts.
 
-ENVIRONMENT (check whether yours differs)
-In the previous session the egress proxy rejected the CONNECT for every host -
-curl, WebFetch and Playwright-driven Chromium all failed, example.com included.
-Only WebSearch worked. That is why there is no recipient list: firm names are
-findable but contact pages are not reachable. If YOUR session has working egress,
-the single highest-value thing you can do is visit these and collect contact
-addresses: insuranceagencyaccountants.com (info@insuranceagencyaccountants.com is
-already known), bookkeepingforbrokers.com, advancedprofessional.net, cocountant.com,
-insurancebackofficepro.com. Avoid ZoomInfo/LeadIQ-style brokers - those addresses
-are often guessed patterns and bounces from a new mailbox get it flagged.
+ENVIRONMENT - TEST THIS FIRST, DO NOT ASSUME
+In the previous session the egress proxy rejected the CONNECT for every host.
+Verified three ways - curl, WebFetch, and Playwright-driven Chromium - all failing
+on example.com, not just on unusual domains. Only WebSearch worked. Outbound access
+is governed by the environment's network policy, which is chosen when the
+environment is created, so YOUR session may well differ. Spend one minute checking
+before you conclude anything:
+
+    curl -sS -o /dev/null -w "%{http_code}\n" https://example.com/
+    curl -sS "$HTTPS_PROXY/__agentproxy/status"     # shows recent denials
+
+IF EGRESS WORKS, HOW TO BROWSE
+Chromium is preinstalled at /opt/pw-browsers and PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
+is set. Never run "playwright install".
+
+    npm install --no-save playwright
+
+The bundled browser-path lookup FAILS with "browser executable not found" because
+the package version does not match the preinstalled build. Pass executablePath
+explicitly, after confirming the version directory with `ls /opt/pw-browsers`:
+
+    chromium.launch({
+      executablePath: "/opt/pw-browsers/chromium-1194/chrome-linux/chrome"
+    })
+
+Sanity-check with page.goto("https://example.com/") before building anything on
+top of it. ERR_TUNNEL_CONNECTION_FAILED means the proxy is refusing, not that
+Playwright is misconfigured.
+
+WHAT TO USE IT FOR
+The product itself never needs egress - customers upload files to us. Browsing is
+only for research and for the one open task: there is no recipient list, because
+firm names are findable by search but contact pages are not. Collect published
+contact addresses from insuranceagencyaccountants.com
+(info@insuranceagencyaccountants.com is already known), bookkeepingforbrokers.com,
+advancedprofessional.net, cocountant.com, insurancebackofficepro.com. Take only
+addresses a firm publishes on its own site. Avoid ZoomInfo/LeadIQ-style brokers -
+those are often guessed patterns, and bounces from a days-old mailbox are the
+fastest way to get it flagged.
+
+Honest caveat: for ~15 addresses a human with a browser beats any of this. Scraping
+only earns its keep if the list needs to be in the hundreds.
 
 SENDING DISCIPLINE
 statementsweep@gmail.com is days old with no sending reputation. Send 3-5 per day
