@@ -24,7 +24,8 @@ industries and 25 rejected opportunities.
 | [`business/06-PRODUCT-SPEC.md`](business/06-PRODUCT-SPEC.md) | Architecture, data model, parsing strategy, the matching cascade, security, scope discipline |
 | [`business/07-GO-TO-MARKET.md`](business/07-GO-TO-MARKET.md) | Positioning, pricing page copy, SEO plan, launch gates, agent operating model |
 | [`business/08-STAGE-0-STATUS.md`](business/08-STAGE-0-STATUS.md) | What was built, what was verified over HTTP, the bugs the tests caught, and what is deliberately not done |
-| [`business/09-LAUNCH-KIT.md`](business/09-LAUNCH-KIT.md) | The owner's ~20 minutes: the one blocking Vercel setting, and copy-paste outreach to get the first real statements |
+| [`business/09-LAUNCH-KIT.md`](business/09-LAUNCH-KIT.md) | The owner's ~20 minutes: copy-paste outreach to get the first real statements |
+| [`business/10-HANDOFF.md`](business/10-HANDOFF.md) | Self-contained prompt to bring a fresh session up to speed |
 
 ## The business
 
